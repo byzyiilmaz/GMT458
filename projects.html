@@ -5,248 +5,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Ankara Map | Beyza Yılmaz</title>
 
-    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="style.css">
+
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-    <!-- OpenLayers CSS -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/ol@10.6.1/ol.css">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-            background-color: #f7f8fa;
-            color: #263238;
-        }
-
-        h1 {
-            color: #245b78;
-        }
-
-        h2 {
-            color: #34495e;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        .map {
-            width: 100%;
-            height: 430px;
-            margin-bottom: 35px;
-            border: 1px solid #ccd5dc;
-            border-radius: 8px;
-        }
-
-        .legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin: 15px 0 25px;
-        }
-
-        .legend span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .sightseeing { background: #2878b5; }
-        .cafe { background: #27966b; }
-        .dessert { background: #d85b91; }
-        .other { background: #805ad5; }
-
-        .note {
-            font-size: 14px;
-            color: #586773;
-        }
-
-        footer {
-            margin-top: 30px;
-            font-size: 13px;
-            color: #586773;
-        }
-    </style>
 </head>
 
-<body>
+<body class="projects-page">
 
-    <h1>My Favourite Places in Ankara</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="technologies.html">Technologies</a>
+        <a href="projects.html">Projects</a>
+    </nav>
 
-    <p>
-        Welcome to my personal map of Ankara!
-        This website presents cultural and historical places,
-        cafes, dessert shops and other places I am interested in.
-        Both maps display the same locations using different Web GIS libraries.
-    </p>
+    <main class="projects-container">
+        <h1>My Favourite Places in Ankara</h1>
 
-    <h2>Map Legend</h2>
+        <p>
+            Welcome to my personal map of Ankara!
+            This website presents cultural and historical places,
+            parks, cafes and other places I am interested in.
+            Both maps display the same locations using different Web GIS libraries.
+        </p>
 
-    <div class="legend">
-        <span><i class="dot sightseeing"></i> Sightseeing</span>
-        <span><i class="dot cafe"></i> Cafes</span>
-        <span><i class="dot dessert"></i> Dessert Shops</span>
-        <span><i class="dot other"></i> Other Places</span>
-    </div>
+        <h2>Map Legend</h2>
 
-    <h2>OpenLayers Map</h2>
-    <p class="note">
-        Nearby markers are grouped together. Zoom in to explore individual places.
-    </p>
-    <div id="openlayers-map" class="map"></div>
+        <div class="legend">
+            <span><i class="dot historical"></i> Historical</span>
+            <span><i class="dot park"></i> Park</span>
+            <span><i class="dot theatre"></i> Theatre</span>
+            <span><i class="dot cafe"></i> Cafe</span>
+            <span><i class="dot shop"></i> Shop</span>
+        </div>
 
-    <h2>Leaflet Map</h2>
-    <p class="note">
-        Click a marker to see the place name and category.
-    </p>
-    <div id="leaflet-map" class="map"></div>
+        <h2>OpenLayers Map</h2>
+        <p class="note">
+            Markers appear at zoom level 12 and above.
+            Nearby markers are grouped together; zoom in to explore individual places.
+        </p>
 
-    <footer>
-        Map data © OpenStreetMap contributors.
-        This website was created for a Web GIS project.
-    </footer>
+        <div id="openlayers-map" class="map"></div>
 
-    <!-- JavaScript libraries -->
+        <h2>Leaflet Map</h2>
+        <p class="note">
+            Markers appear at zoom level 12 and above.
+            Click a marker to see the place name and category.
+        </p>
+
+        <div id="leaflet-map" class="map"></div>
+
+        <footer>
+            Map data © OpenStreetMap contributors.
+            This website was created for a Web GIS project.
+        </footer>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/ol@10.6.1/dist/ol.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // LOCATIONS IN ANKARA
-        // Coordinates are approximate and should be verified before submission.
+        // LOCATION DATA
+        // Coordinates use [longitude, latitude].
 
         const locations = [
-            // Cultural and historical places
             {
                 name: "Anıtkabir",
-                category: "Sightseeing",
+                category: "Historical",
                 coordinates: [32.8369, 39.9251]
             },
             {
-                name: "TBMM",
-                category: "Sightseeing",
-                coordinates: [32.8554, 39.8877]
+                name: "Cumhuriyet Müzesi (II. TBMM Binası)",
+                category: "Historical",
+                coordinates: [32.85167, 39.94111]
             },
             {
                 name: "Gölbaşı",
-                category: "Sightseeing",
-                coordinates: [32.8017, 39.7900]
+                category: "Park",
+                coordinates: [32.80375866676279, 39.786115428765434]
             },
             {
                 name: "Botanik Parkı",
-                category: "Sightseeing",
-                coordinates: [32.8648, 39.8868]
+                category: "Park",
+                coordinates: [32.85682, 39.88819]
             },
             {
-                name: "Ankara Palas",
-                category: "Sightseeing",
-                coordinates: [32.8557, 39.9415]
+                name: "Ankara Palas Müzesi",
+                category: "Historical",
+                coordinates: [32.851589, 39.941538]
             },
             {
                 name: "Küçük Tiyatro",
-                category: "Sightseeing",
-                coordinates: [32.8620, 39.9400]
+                category: "Theatre",
+                coordinates: [32.853253, 39.938464]
             },
             {
                 name: "Ankara Kalesi",
-                category: "Sightseeing",
-                coordinates: [32.8627, 39.9410]
-            },
-
-            // Dessert shops
-            {
-                name: "Latife - Beşevler",
-                category: "Dessert",
-                coordinates: [32.8250, 39.9360]
+                category: "Historical",
+                coordinates: [32.86543, 39.94149]
             },
             {
-                name: "Boston - Bahçelievler",
-                category: "Dessert",
-                coordinates: [32.8210, 39.9230]
-            },
-            {
-                name: "Versando - Bahçeli",
-                category: "Dessert",
-                coordinates: [32.8230, 39.9200]
-            },
-            {
-                name: "Bonapple - Tunalı",
-                category: "Dessert",
-                coordinates: [32.8600, 39.9020]
-            },
-
-            // Cafes
-            {
-                name: "Mountain - Beşevler",
+                name: "Latife’s — Beşevler",
                 category: "Cafe",
-                coordinates: [32.8240, 39.9340]
+                coordinates: [32.828672, 39.93042]
             },
             {
-                name: "Coffee Lab - Beşevler",
+                name: "Boston Drink & Dessert — Bahçelievler",
                 category: "Cafe",
-                coordinates: [32.8260, 39.9350]
+                coordinates: [32.826596, 39.9251]
             },
             {
-                name: "Kahve Dünyası - Tunalı",
+                name: "Versando Bahçelievler",
                 category: "Cafe",
-                coordinates: [32.8600, 39.9010]
+                coordinates: [32.827270, 39.928269]
             },
             {
-                name: "Walkers - Tunalı",
+                name: "Bonapple — Tunalı Hilmi",
                 category: "Cafe",
-                coordinates: [32.8620, 39.9000]
+                coordinates: [32.85958061174765, 39.908714874923284]
             },
             {
-                name: "Coffee de Toe - Saraçoğlu",
+                name: "Mountain — Beşevler",
                 category: "Cafe",
-                coordinates: [32.8540, 39.8990]
-            },
-
-            // Other places
-            {
-                name: "Hanedan Esans - Ulus",
-                category: "Other",
-                coordinates: [32.8560, 39.9410]
+                coordinates: [32.82507145407711, 39.93192400754589]
             },
             {
-                name: "IF Sokak - Tepe Prime",
-                category: "Other",
-                coordinates: [32.7770, 39.9080]
+                name: "Coffee LAB Beşevler",
+                category: "Cafe",
+                coordinates: [32.8248, 39.9315]
+            },
+            {
+                name: "Kahve Dünyası — Tunalı Hilmi",
+                category: "Cafe",
+                coordinates: [32.862593612065666, 39.89918312222412]
+            },
+            {
+                name: "Walker's Tunalı",
+                category: "Cafe",
+                coordinates: [32.8607, 39.9062]
+            },
+            {
+                name: "Caffé Di Toeé — Saraçoğlu",
+                category: "Cafe",
+                coordinates: [32.848902, 39.920217]
+            },
+            {
+                name: "Hanedan Esans — Ulus",
+                category: "Shop",
+                coordinates: [32.857957, 39.942651]
+            },
+            {
+                name: "IF Sokak — Tepe",
+                category: "Cafe",
+                coordinates: [32.8615, 39.9068]
             }
         ];
 
-        // COLORS FOR LOCATION CATEGORIES
+        // CATEGORY COLORS
+
         function getCategoryColor(category) {
             const colors = {
-                "Sightseeing": "#2878b5",
-                "Cafe": "#27966b",
-                "Dessert": "#d85b91",
-                "Other": "#805ad5"
+                "Historical": "#2878b5",
+                "Park": "#27966b",
+                "Theatre": "#d85b91",
+                "Cafe": "#e67e22",
+                "Shop": "#805ad5"
             };
 
             return colors[category] || "#2878b5";
         }
 
         // OPENLAYERS MAP
+
         const features = locations.map(function(location) {
-            const feature = new ol.Feature({
+            return new ol.Feature({
                 geometry: new ol.geom.Point(
                     ol.proj.fromLonLat(location.coordinates)
                 ),
                 name: location.name,
                 category: location.category
             });
-
-            return feature;
         });
 
         const vectorSource = new ol.source.Vector({
@@ -254,7 +195,8 @@
             wrapX: false
         });
 
-        // Group nearby markers into clusters
+        // Group nearby markers together.
+
         const clusterSource = new ol.source.Cluster({
             distance: 40,
             source: vectorSource
@@ -262,12 +204,13 @@
 
         const markerLayer = new ol.layer.Vector({
             source: clusterSource,
+            visible: false,
 
             style: function(feature) {
                 const groupedFeatures = feature.get("features");
                 const count = groupedFeatures.length;
 
-                let color = "#e67e22";
+                let color = "#596b78";
 
                 if (count === 1) {
                     color = getCategoryColor(
@@ -317,7 +260,23 @@
             })
         });
 
-        // Show information when a single marker is clicked
+        // Show markers at zoom level 12 and above.
+
+        function updateOpenLayersMarkers() {
+            markerLayer.setVisible(
+                openlayersMap.getView().getZoom() >= 12
+            );
+        }
+
+        openlayersMap.getView().on(
+            "change:resolution",
+            updateOpenLayersMarkers
+        );
+
+        updateOpenLayersMarkers();
+
+        // Show information when an individual marker is clicked.
+
         openlayersMap.on("singleclick", function(event) {
             openlayersMap.forEachFeatureAtPixel(
                 event.pixel,
@@ -338,14 +297,17 @@
         });
 
         // LEAFLET MAP
+        // noWrap and bounds help prevent repeated world copies.
+
         const leafletMap = L.map("leaflet-map", {
-            minZoom: 5,
+            minZoom: 2,
             maxBounds: [[-85, -180], [85, 180]],
-            maxBoundsViscosity: 1.0
+            maxBoundsViscosity: 1.0,
+            worldCopyJump: false
         }).setView([39.92, 32.85], 11);
 
         L.tileLayer(
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "https://tile.openstreetmap.de/{z}/{x}/{y}.png",
             {
                 attribution: "&copy; OpenStreetMap contributors",
                 noWrap: true,
@@ -353,7 +315,10 @@
             }
         ).addTo(leafletMap);
 
-        // Add colored markers to Leaflet
+        // Store markers in a separate group so visibility can be controlled.
+
+        const markerGroup = L.layerGroup();
+
         locations.forEach(function(location) {
             const marker = L.circleMarker(
                 [
@@ -369,14 +334,30 @@
                 }
             );
 
-            marker.addTo(leafletMap);
+            marker.addTo(markerGroup);
 
             marker.bindPopup(
                 "<strong>" + location.name + "</strong>" +
                 "<br>Category: " + location.category
             );
         });
-    </script>
 
+        // Show markers at zoom level 12 and above.
+
+        function updateLeafletMarkers() {
+            if (leafletMap.getZoom() >= 12) {
+                if (!leafletMap.hasLayer(markerGroup)) {
+                    leafletMap.addLayer(markerGroup);
+                }
+            } else {
+                if (leafletMap.hasLayer(markerGroup)) {
+                    leafletMap.removeLayer(markerGroup);
+                }
+            }
+        }
+
+        leafletMap.on("zoomend", updateLeafletMarkers);
+        updateLeafletMarkers();
+    </script>
 </body>
 </html>
