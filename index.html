@@ -4,59 +4,261 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beyza Yılmaz | Personal Website</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #10294b;
+        }
+
+        .home {
+            min-height: 100vh;
+            min-height: 100svh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 40px 20px 125px;
+        }
+
+        /* Decorative images */
+        .left-image {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 32%;
+            object-fit: cover;
+            object-position: left center;
+            opacity: 0.45;
+            pointer-events: none;
+            mask-image: linear-gradient(to right, black, transparent);
+            -webkit-mask-image: linear-gradient(to right, black, transparent);
+        }
+
+        .globe-image {
+            position: absolute;
+            right: -65px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: min(43vw, 570px);
+            height: auto;
+            opacity: 0.55;
+            pointer-events: none;
+            mask-image: linear-gradient(to left, black 50%, transparent);
+            -webkit-mask-image: linear-gradient(to left, black 50%, transparent);
+        }
+
+        /* Main introduction */
+        .intro {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .hello {
+            font-size: 15px;
+            letter-spacing: 7px;
+            margin-bottom: 25px;
+            color: #53657a;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: normal;
+            font-size: clamp(48px, 7.5vw, 94px);
+            letter-spacing: -3px;
+            margin-bottom: 28px;
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 2.1vw, 23px);
+            color: #263b54;
+            min-height: 34px;
+        }
+
+        #typed-text {
+            color: #198754;
+            font-family: monospace;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 25px;
+            background: #198754;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 0.8s steps(2, start) infinite;
+        }
+
+        .accent-line {
+            width: 85px;
+            height: 3px;
+            background: #198754;
+            margin: 32px auto 0;
+            border-radius: 5px;
+        }
+
+        /* Bottom navigation */
+        .navigation {
+            position: absolute;
+            z-index: 2;
+            bottom: 45px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 35px;
+            padding: 0 20px;
+        }
+
+        .navigation a {
+            position: relative;
+            text-decoration: none;
+            color: #263b54;
+            font-size: 15px;
+            padding: 10px 0;
+            transition: color 0.25s ease;
+        }
+
+        .navigation a::after {
+            content: "";
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #198754;
+            transition: width 0.3s ease;
+        }
+
+        .navigation a:hover,
+        .navigation a.active {
+            color: #198754;
+        }
+
+        .navigation a:hover::after,
+        .navigation a.active::after {
+            width: 100%;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Responsive layout */
+        @media (max-width: 650px) {
+            .home {
+                padding-bottom: 145px;
+            }
+
+            h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .hello {
+                font-size: 12px;
+                letter-spacing: 5px;
+            }
+
+            .left-image {
+                width: 40%;
+                opacity: 0.3;
+            }
+
+            .globe-image {
+                width: 65vw;
+                right: -100px;
+                opacity: 0.25;
+            }
+
+            .navigation {
+                bottom: 20px;
+                gap: 12px 22px;
+            }
+
+            .navigation a {
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cursor {
+                animation: none;
+            }
+
+            .navigation a,
+            .navigation a::after {
+                transition: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="technologies.html">Technologies</a>
-        <a href="projects.html">Projects</a>
-    </nav>
+    <main class="home">
 
-    <main class="home-container">
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Beyza Yılmaz</h1>
-                <div class="animated-line"></div>
+        <img
+            src="images/leftside.jpg"
+            alt=""
+            class="left-image"
+        >
 
-                <h2>Geomatics Engineering Student</h2>
+        <img
+            src="images/globe.jpg"
+            alt=""
+            class="globe-image"
+        >
 
-                <h3>About Me</h3>
+        <section class="intro">
+            <p class="hello">H E L L O, &nbsp; I ' M</p>
 
-                <p>
-                    Hi! I'm Beyza, a Geomatics Engineering student at
-                    Hacettepe University.
-                </p>
+            <h1>Beyza Yılmaz</h1>
 
-                <p>
-                    During my studies, I have had the opportunity to learn
-                    about mapping, geographic data, and different software
-                    used in the field. I have also gained some practical
-                    experience through internships.
-                </p>
-
-                <p>
-                    On this website, you can learn a little about me,
-                    explore the technologies I have used, and see some
-                    of my work related to maps and Web GIS.
-                </p>
-            </div>
-
-            <div class="hero-image">
-                <img src="images/profil.jpg" alt="Beyza Yılmaz">
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-            <h2>Contact</h2>
-            <p>
-                If you would like to contact me, feel free to send me an email.
+            <p class="subtitle">
+                I'm a <span id="typed-text"></span><span class="cursor"></span>
             </p>
-            <a href="mailto:byilmaz21@hacettepe.edu.tr">
-                byilmaz21@hacettepe.edu.tr
-            </a>
+
+            <div class="accent-line"></div>
         </section>
+
+        <nav class="navigation">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="technologies.html">Technologies</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
     </main>
+
+    <script>
+        const message = "Future Geomatics Engineer";
+        const typedText = document.getElementById("typed-text");
+        let letter = 0;
+
+        function typeWriter() {
+            if (letter < message.length) {
+                typedText.textContent += message.charAt(letter);
+                letter++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+
+        window.addEventListener("load", typeWriter);
+    </script>
 </body>
 </html>

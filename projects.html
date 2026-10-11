@@ -3,74 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Ankara Map | Beyza Yılmaz</title>
+    <title>My Favourite Places in Ankara | Beyza Yılmaz</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@10.6.1/ol.css">
 
-    <link rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/ol@10.6.1/ol.css">
+        body {
+            margin: 0;
+            background: #fff;
+            color: #263746;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        .page-frame {
+            width: calc(100% - 60px);
+            max-width: 1450px;
+            min-height: 90vh;
+            margin: 28px auto;
+            padding: 0 38px 45px;
+            border: 1px solid #e0e7e2;
+            border-radius: 20px;
+            background: #fff;
+        }
+
+        .top-nav {
+            min-height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            border-bottom: 1px solid #edf1f3;
+        }
+
+        .brand {
+            color: #16865b;
+            font-size: 19px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 8px 0;
+            color: #53636d;
+            font-size: 15px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #16865b;
+            font-weight: 600;
+        }
+
+        .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #16865b;
+    transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+        .projects-container {
+            max-width: 1700px;
+            margin: 0 auto;
+            padding: 35px 0 10px;
+        }
+
+        .page-heading {
+            margin: 0;
+            color: #203746;
+            font-size: clamp(30px, 4vw, 42px);
+            font-weight: 600;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .heading-line {
+            width: 58px;
+            height: 3px;
+            margin: 18px auto 20px;
+            border-radius: 5px;
+            background: #63c5a0;
+        }
+
+        .intro {
+            max-width: 820px;
+            margin: 0 auto 34px;
+            color: #63717a;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .legend-card {
+            margin: 0 0 34px;
+            padding: 20px 24px;
+            border: 1px solid #dcefe7;
+            border-radius: 14px;
+            background: #f6fbf8;
+        }
+
+        .section-title {
+            margin: 0 0 14px;
+            color: #203746;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .legend-card .section-title {
+            margin-bottom: 15px;
+            font-size: 19px;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 24px;
+        }
+
+        .legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4c5d66;
+            font-size: 14px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot.historical {
+            background: #2878b5;
+        }
+
+        .dot.park {
+            background: #27966b;
+        }
+
+        .dot.theatre {
+            background: #d85b91;
+        }
+
+        .dot.cafe {
+            background: #e67e22;
+        }
+
+        .dot.shop {
+            background: #805ad5;
+        }
+
+        .map-section {
+            margin: 0 0 30px;
+            padding: 24px;
+            border: 1px solid #e4ebee;
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(32, 55, 70, 0.045);
+        }
+
+        .map-section .section-title {
+            margin-bottom: 7px;
+        }
+
+        .note {
+            margin: 0 0 18px;
+            color: #687780;
+            font-size: 14px;
+        }
+
+        .map {
+            width: 100%;
+            height: 440px;
+            overflow: hidden;
+            border: 1px solid #e1e8eb;
+            border-radius: 10px;
+            background: #f2f5f6;
+        }
+
+        footer {
+            padding: 20px 0 4px;
+            color: #7a878e;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .leaflet-popup-content {
+            line-height: 1.6;
+        }
+
+        @media (max-width: 800px) {
+            .page-frame {
+                width: calc(100% - 16px);
+                margin: 8px auto;
+                padding: 0 10px 20px;
+            }
+
+            .top-nav {
+                padding: 18px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 18px;
+            }
+
+            .projects-container {
+                padding-top: 32px;
+            }
+
+            .legend-card,
+            .map-section {
+                padding: 18px;
+            }
+
+            .map {
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 14px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .legend {
+                gap: 12px 16px;
+            }
+
+            .map {
+                height: 320px;
+            }
+        }
+    </style>
 </head>
 
-<body class="projects-page">
+<body>
+    <div class="page-frame">
+        <nav class="top-nav">
+            <a class="brand" href="index.html">BEYZA YILMAZ</a>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="technologies.html">Technologies</a>
-        <a href="projects.html">Projects</a>
-    </nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="technologies.html">Technologies</a>
+                <a class="active" href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
 
-    <main class="projects-container">
-        <h1>My Favourite Places in Ankara</h1>
+        <main class="projects-container">
+            <h1 class="page-heading">My Favourite Places in Ankara</h1>
+            <div class="heading-line"></div>
 
-        <p>
-            Welcome to my personal map of Ankara!
-            This website presents cultural and historical places,
-            parks, cafes and other places I am interested in.
-            Both maps display the same locations using different Web GIS libraries.
-        </p>
+            <p class="intro">
+                Welcome to my personal map of Ankara! This website shows some of my favourite places
+                in the city, including historical sites, parks, theatres, cafes and shops.
+                Both maps display the same locations using different Web GIS libraries.
+            </p>
 
-        <h2>Map Legend</h2>
+            <section class="legend-card">
+                <h2 class="section-title">Map Legend</h2>
 
-        <div class="legend">
-            <span><i class="dot historical"></i> Historical</span>
-            <span><i class="dot park"></i> Park</span>
-            <span><i class="dot theatre"></i> Theatre</span>
-            <span><i class="dot cafe"></i> Cafe</span>
-            <span><i class="dot shop"></i> Shop</span>
-        </div>
+                <div class="legend">
+                    <span><i class="dot historical"></i> Historical</span>
+                    <span><i class="dot park"></i> Park</span>
+                    <span><i class="dot theatre"></i> Theatre</span>
+                    <span><i class="dot cafe"></i> Cafe</span>
+                    <span><i class="dot shop"></i> Shop</span>
+                </div>
+            </section>
 
-        <h2>OpenLayers Map</h2>
-        <p class="note">
-            Markers appear at zoom level 12 and above.
-            Nearby markers are grouped together; zoom in to explore individual places.
-        </p>
+            <section class="map-section">
+                <h2 class="section-title">OpenLayers Map</h2>
 
-        <div id="openlayers-map" class="map"></div>
+                <p class="note">
+                    Markers appear at zoom level 12 and above.
+                    Nearby markers are grouped together; zoom in to explore individual places.
+                </p>
 
-        <h2>Leaflet Map</h2>
-        <p class="note">
-            Markers appear at zoom level 12 and above.
-            Click a marker to see the place name and category.
-        </p>
+                <div id="openlayers-map" class="map"></div>
+            </section>
 
-        <div id="leaflet-map" class="map"></div>
+            <section class="map-section">
+                <h2 class="section-title">Leaflet Map</h2>
 
-        <footer>
-            Map data © OpenStreetMap contributors.
-            This website was created for a Web GIS project.
-        </footer>
-    </main>
+                <p class="note">
+                    Markers appear at zoom level 12 and above.
+                    Click a marker to see the place name and category.
+                </p>
+
+                <div id="leaflet-map" class="map"></div>
+            </section>
+
+            <footer>
+                Map data © OpenStreetMap contributors.
+            </footer>
+        </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/ol@10.6.1/dist/ol.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // LOCATION DATA
-        // Coordinates use [longitude, latitude].
-
         const locations = [
             {
                 name: "Anıtkabir",
@@ -91,6 +359,11 @@
                 name: "Botanik Parkı",
                 category: "Park",
                 coordinates: [32.85682, 39.88819]
+            },
+            {
+                name: "Seğmenler Parkı",
+                category: "Park",
+                coordinates: [32.8745, 39.8945]
             },
             {
                 name: "Ankara Palas Müzesi",
@@ -158,14 +431,18 @@
                 coordinates: [32.857957, 39.942651]
             },
             {
+               name: "Zaande Restaurant & Coffee",
+               category: "Cafe",
+               coordinates: [32.76527049449635, 39.91266591640132]
+       },
+            {
                 name: "IF Sokak — Tepe",
                 category: "Cafe",
-                coordinates: [32.8615, 39.9068]
+                coordinates: [32.75530814973767, 39.911382138615956]
             }
         ];
 
-        // CATEGORY COLORS
-
+    
         function getCategoryColor(category) {
             const colors = {
                 "Historical": "#2878b5",
@@ -177,8 +454,6 @@
 
             return colors[category] || "#2878b5";
         }
-
-        // OPENLAYERS MAP
 
         const features = locations.map(function(location) {
             return new ol.Feature({
@@ -194,8 +469,6 @@
             features: features,
             wrapX: false
         });
-
-        // Group nearby markers together.
 
         const clusterSource = new ol.source.Cluster({
             distance: 40,
@@ -260,8 +533,6 @@
             })
         });
 
-        // Show markers at zoom level 12 and above.
-
         function updateOpenLayersMarkers() {
             markerLayer.setVisible(
                 openlayersMap.getView().getZoom() >= 12
@@ -274,8 +545,6 @@
         );
 
         updateOpenLayersMarkers();
-
-        // Show information when an individual marker is clicked.
 
         openlayersMap.on("singleclick", function(event) {
             openlayersMap.forEachFeatureAtPixel(
@@ -296,9 +565,6 @@
             );
         });
 
-        // LEAFLET MAP
-        // noWrap and bounds help prevent repeated world copies.
-
         const leafletMap = L.map("leaflet-map", {
             minZoom: 2,
             maxBounds: [[-85, -180], [85, 180]],
@@ -314,8 +580,6 @@
                 bounds: [[-85, -180], [85, 180]]
             }
         ).addTo(leafletMap);
-
-        // Store markers in a separate group so visibility can be controlled.
 
         const markerGroup = L.layerGroup();
 
@@ -341,8 +605,6 @@
                 "<br>Category: " + location.category
             );
         });
-
-        // Show markers at zoom level 12 and above.
 
         function updateLeafletMarkers() {
             if (leafletMap.getZoom() >= 12) {
