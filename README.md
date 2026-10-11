@@ -4,7 +4,7 @@
 
 This website was developed as part of the GMT458 course. It introduces me, presents technologies I have used during my Geomatics Engineering studies, and displays some of my favourite places in Ankara on interactive maps.
 
-**Live Website:** [Visit My Website](https://byzyiilmaz.github.io/GMT458/)
+**Live Website:** https://byzyiilmaz.github.io/GMT458/
 
 ## Website Pages
 
