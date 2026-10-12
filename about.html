@@ -13,23 +13,25 @@
         body {
             margin: 0;
             padding: 0;
-            background: #ffffff;
+            background: #f4f7f2;
             font-family: Arial, Helvetica, sans-serif;
-            color: #203858;
+            color: #203044;
         }
 
         .page-frame {
+            position: relative;
             width: calc(100% - 60px);
-            max-width: 1450px;
+            max-width: 1510px;
             min-height: 90vh;
-            margin: 28px auto;
-            padding: 0 38px 45px;
-            border: 1px solid #e0e7e2;
-            border-radius: 20px;
+            margin: 16px auto;
+            padding: 0 40px 55px;
+            border: 1px solid #dce7dc;
+            border-radius: 18px;
+            background: #fff;
         }
 
         .top-nav {
-            min-height: 82px;
+            min-height: 87px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,9 +40,9 @@
         }
 
         .brand {
-            color: #16865b;
-            font-size: 19px;
-            font-weight: 600;
+            color: #087653;
+            font-size: 20px;
+            font-weight: 700;
             text-decoration: none;
             white-space: nowrap;
         }
@@ -48,7 +50,7 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 26px;
+            gap: 28px;
         }
 
         .nav-links a {
@@ -67,7 +69,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #16865b;
+            background: #087653;
             transition: width 0.25s ease;
         }
 
@@ -77,84 +79,251 @@
         }
 
         .nav-links a.active {
-            color: #16865b;
+            color: #087653;
             font-weight: 600;
         }
 
         .about-heading {
             text-align: center;
-            margin: 35px 0 25px;
+            margin: 27px 0 38px;
         }
 
         .about-heading h1 {
             margin: 0 0 13px;
-            color: #203858;
-            font-size: 36px;
-            font-weight: 500;
+            color: #182b3e;
+            font-size: 40px;
+            font-weight: 650;
+            letter-spacing: -1px;
         }
 
         .heading-line {
             width: 55px;
             height: 3px;
-            margin: 0 auto;
+            margin: 0 auto 13px;
             border-radius: 5px;
             background: #16865b;
         }
 
+        .heading-subtitle {
+            margin: 0;
+            color: #718092;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
         .about-content {
             display: grid;
-            grid-template-columns: 380px minmax(0, 1fr);
-            gap: 35px;
-            align-items: start;
-            width: 100%;
-            margin: 0;
+            grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+            gap: 48px;
+            align-items: center;
+            max-width: 1370px;
+            margin: 0 auto;
+        }
+
+        .left-column {
+            min-width: 0;
         }
 
         .photo-wrapper {
+            position: relative;
             width: 100%;
-            padding: 0 8px 8px 0;
+            max-width: 405px;
+            margin: 0 auto 27px;
+        }
+
+        .photo-wrapper::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: -20px;
+            left: -20px;
+            width: 94%;
+            height: 105%;
+            border-radius: 55px 35px 55px 35px;
+            background: #edf3e9;
+            transform: rotate(-5deg);
         }
 
         .about-photo {
+            position: relative;
+            z-index: 1;
             display: block;
             width: 100%;
-            height: 435px;
+            height: 415px;
             object-fit: cover;
             object-position: center;
-            border-radius: 0;
-            box-shadow: 8px 8px 0 #e3f1e9;
+            border: 1px solid #e4ebe3;
+            border-radius: 12px;
+            box-shadow: 0 7px 18px rgba(34, 62, 49, 0.08);
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0;
+            overflow: hidden;
+            padding: 20px 10px;
+            border: 1px solid #edf2e9;
+            border-radius: 13px;
+            background: #f4f7f0;
+        }
+
+        .info-card {
+            min-width: 0;
+            padding: 5px 7px;
+            text-align: center;
+        }
+
+        .info-icon {
+            display: block;
+            margin-bottom: 8px;
+            color: #18805b;
+            font-size: 25px;
+            line-height: 1.2;
+        }
+
+        .info-card strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #203044;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .info-card span:last-child {
+            display: block;
+            color: #718092;
+            font-size: 12px;
+            line-height: 1.5;
         }
 
         .about-text {
-            padding-top: 3px;
+            min-width: 0;
+            padding: 0 0 4px;
         }
 
         .about-text h2 {
-            margin: 0 0 12px;
-            color: #203858;
-            font-size: 29px;
-            font-weight: 500;
-        }
-
-        .about-text h3 {
-            margin: 0 0 24px;
-            color: #16865b;
-            font-size: 19px;
-            font-weight: 500;
+            margin: 0 0 22px;
+            color: #125d50;
+            font-size: 27px;
+            font-weight: 600;
+            line-height: 1.35;
         }
 
         .about-text p {
-            margin: 0 0 20px;
-            color: #59697d;
-            font-size: 17px;
-            line-height: 1.9;
+            margin: 0 0 23px;
+            color: #53647a;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 27px 0 26px;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 17px;
+            border: 1px solid #edf2e9;
+            border-radius: 40px;
+            background: #f1f5ed;
+            color: #293c4c;
+            font-size: 14px;
+            white-space: nowrap;
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            background: #e6efe4;
+            box-shadow: 0 5px 14px rgba(30, 91, 65, 0.08);
+        }
+
+        .skill-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #37785f;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .project-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            min-height: 53px;
+            padding: 14px 27px;
+            border: 1px solid #167c58;
+            border-radius: 35px;
+            background: #16845d;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 12px rgba(22, 132, 93, 0.12);
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .project-button:hover {
+            transform: translateY(-3px);
+            background: #106b4b;
+            box-shadow: 0 8px 18px rgba(22, 132, 93, 0.2);
+        }
+
+        .button-arrow {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        @media (max-width: 1050px) {
+            .page-frame {
+                width: calc(100% - 30px);
+                padding-right: 28px;
+                padding-left: 28px;
+            }
+
+            .about-content {
+                grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+                gap: 30px;
+            }
+
+            .about-photo {
+                height: 365px;
+            }
+
+            .about-text h2 {
+                font-size: 24px;
+            }
+
+            .about-text p {
+                font-size: 15px;
+            }
+
+            .skill-tag {
+                padding: 10px 13px;
+                font-size: 13px;
+            }
         }
 
         @media (max-width: 800px) {
             .page-frame {
                 width: calc(100% - 20px);
                 margin: 10px auto;
-                padding: 0 18px 30px;
+                padding: 0 18px 35px;
             }
 
             .top-nav {
@@ -167,33 +336,91 @@
             .nav-links {
                 width: 100%;
                 flex-wrap: wrap;
-                gap: 17px;
+                gap: 14px 20px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
             }
 
             .about-heading {
-                margin: 30px 0 25px;
+                margin: 30px 0 32px;
             }
 
             .about-heading h1 {
-                font-size: 31px;
+                font-size: 34px;
             }
 
             .about-content {
                 grid-template-columns: 1fr;
-                gap: 28px;
+                gap: 32px;
             }
 
-            .photo-wrapper {
-                max-width: 380px;
+            .left-column {
+                width: 100%;
+                max-width: 460px;
                 margin: 0 auto;
             }
 
+            .photo-wrapper {
+                max-width: 390px;
+            }
+
             .about-photo {
-                height: 400px;
+                height: auto;
+                aspect-ratio: 0.95;
+            }
+
+            .about-text {
+                padding: 0 2px;
             }
 
             .about-text h2 {
-                font-size: 26px;
+                font-size: 24px;
+            }
+
+            .about-text p {
+                font-size: 15px;
+                line-height: 1.8;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .info-cards {
+                padding: 14px 5px;
+            }
+
+            .info-card {
+                padding: 0 4px;
+            }
+
+            .info-card strong {
+                font-size: 11px;
+            }
+
+            .info-card span:last-child {
+                font-size: 10px;
+            }
+
+            .skill-tags {
+                gap: 8px;
+            }
+
+            .skill-tag {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
+            .project-button {
+                padding: 12px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -217,37 +444,75 @@
         <header class="about-heading">
             <h1>About Me</h1>
             <div class="heading-line"></div>
+            <p class="heading-subtitle">
+                A brief introduction about me, my academic background, interests and experience.
+            </p>
         </header>
 
         <section class="about-content">
-            <div class="photo-wrapper">
-                <img
-                    class="about-photo"
-                    src="images/profil.jpg"
-                    alt="Beyza Yılmaz"
-                >
+
+            <div class="left-column">
+                <div class="photo-wrapper">
+                    <img
+                        class="about-photo"
+                        src="images/profil.jpg"
+                        alt="Beyza Yılmaz"
+                    >
+                </div>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <span class="info-icon" aria-hidden="true">🎓</span>
+                        <strong>Hacettepe University</strong>
+                        <span>Geomatics Engineering</span>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-icon" aria-hidden="true">📍</span>
+                        <strong>Ankara, Türkiye</strong>
+                        <span>Based in</span>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-icon" aria-hidden="true">🗺️</span>
+                        <strong>Mapping &amp; GIS</strong>
+                        <span>Field of Interest</span>
+                    </div>
+                </div>
             </div>
 
             <div class="about-text">
-                <h3>Geomatics Engineering Student</h3>
+                <h2>Geomatics Engineering Student</h2>
 
                 <p>
-                    Hi! I'm Beyza, a Geomatics Engineering student at
-                    Hacettepe University.
+                    Hi! I'm Beyza, a Geomatics Engineering student at Hacettepe University.
+                    I am interested in mapping, geographic data, spatial analysis and Web GIS.
+                    During my studies, I have had the opportunity to work with different software
+                    and tools, and I have gained practical experience through internships.
                 </p>
 
                 <p>
-                    During my studies, I have had the opportunity to learn
-                    about mapping, geographic data, and different software
-                    used in the field. I have also gained some practical
-                    experience through internships.
+                    I enjoy learning about how spatial data can be used to understand and solve
+                    real-world problems. On this website, you can learn a little more about me,
+                    explore the technologies I have used, and see some of my work related to maps
+                    and Web GIS.
                 </p>
 
-                <p>
-                    On this website, you can learn a little about me,
-                    explore the technologies I have used, and see some of
-                    my work related to maps and Web GIS.
-                </p>
+                <div class="skill-tags">
+                    <span class="skill-tag"><span class="skill-icon">🌐</span> GIS</span>
+                    <span class="skill-tag"><span class="skill-icon">🛰️</span> Remote Sensing</span>
+                    <span class="skill-tag"><span class="skill-icon">🗺️</span> Web GIS</span>
+                    <span class="skill-tag"><span class="skill-icon">📍</span> Mapping</span>
+                    <span class="skill-tag"><span class="skill-icon">🐍</span> Python</span>
+                    <span class="skill-tag"><span class="skill-icon">🌍</span> QGIS</span>
+                    <span class="skill-tag"><span class="skill-icon">🛰️</span> Google Earth Engine</span>
+                    <span class="skill-tag"><span class="skill-icon">📐</span> AutoCAD</span>
+                </div>
+
+                <a class="project-button" href="projects.html">
+                    Explore My Projects
+                    <span class="button-arrow" aria-hidden="true">→</span>
+                </a>
             </div>
         </section>
 

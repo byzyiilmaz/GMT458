@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
 
         body {
             margin: 0;
-            background: #fff;
+            background: #f4f7f2;
             color: #263746;
             font-family: Arial, Helvetica, sans-serif;
             line-height: 1.6;
@@ -62,7 +63,7 @@
             color: #53636d;
             font-size: 15px;
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color .2s ease;
         }
 
         .nav-links a:hover,
@@ -72,20 +73,20 @@
         }
 
         .nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: #16865b;
-    transition: width 0.25s ease;
-}
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: #16865b;
+            transition: width .25s ease;
+        }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
-}
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
 
         .projects-container {
             max-width: 1700px;
@@ -160,25 +161,11 @@
             border-radius: 50%;
         }
 
-        .dot.historical {
-            background: #2878b5;
-        }
-
-        .dot.park {
-            background: #27966b;
-        }
-
-        .dot.theatre {
-            background: #d85b91;
-        }
-
-        .dot.cafe {
-            background: #e67e22;
-        }
-
-        .dot.shop {
-            background: #805ad5;
-        }
+        .dot.historical { background: #2878b5; }
+        .dot.park { background: #27966b; }
+        .dot.theatre { background: #d85b91; }
+        .dot.cafe { background: #e67e22; }
+        .dot.shop { background: #805ad5; }
 
         .map-section {
             margin: 0 0 30px;
@@ -186,7 +173,7 @@
             border: 1px solid #e4ebee;
             border-radius: 15px;
             background: #fff;
-            box-shadow: 0 5px 20px rgba(32, 55, 70, 0.045);
+            box-shadow: 0 5px 20px rgba(32, 55, 70, .045);
         }
 
         .map-section .section-title {
@@ -215,11 +202,7 @@
             text-align: center;
         }
 
-        .leaflet-popup-content {
-            line-height: 1.6;
-        }
-
-        /* OpenLayers location popup */
+        /* OpenLayers popup */
         .ol-location-popup {
             position: relative;
             min-width: 190px;
@@ -228,53 +211,112 @@
             border: 1px solid #dcefe7;
             border-radius: 12px;
             background: #fff;
-            box-shadow: 0 8px 28px rgba(32, 55, 70, 0.18);
+            box-shadow: 0 8px 28px rgba(32, 55, 70, .18);
             color: #263746;
             font-size: 14px;
             line-height: 1.5;
         }
-        .ol-location-popup::after {
-            content: "";
-            position: absolute;
-            left: 24px;
-            bottom: -8px;
-            width: 14px;
-            height: 14px;
-            background: #fff;
-            border-right: 1px solid #dcefe7;
-            border-bottom: 1px solid #dcefe7;
-            transform: rotate(45deg);
-        }
+
         .ol-location-popup-title {
             margin: 0 0 5px;
             color: #203746;
             font-size: 15px;
-            font-weight: 700;
-            line-height: 1.35;
         }
+
         .ol-location-popup-category {
             margin: 0;
             color: #63717a;
             font-size: 13px;
         }
+
         .ol-location-popup-close {
             position: absolute;
             top: 7px;
             right: 9px;
             width: 25px;
             height: 25px;
-            padding: 0;
             border: 0;
             border-radius: 50%;
             background: #f1f7f4;
-            color: #53636d;
             font-size: 18px;
-            line-height: 1;
             cursor: pointer;
         }
-        .ol-location-popup-close:hover {
-            background: #e0f1e8;
+
+        /* Leaflet photo popup */
+        .place-photo-popup .leaflet-popup-content {
+            width: 270px !important;
+            max-width: 75vw;
+            margin: 12px;
+            line-height: 1.6;
+        }
+
+        .popup-photo {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 260px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: zoom-in;
+            background: #f7f4f1;
+        }
+
+        .google-map-link {
+            display: inline-block;
+            margin-top: 8px;
             color: #16865b;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .google-map-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Full-screen photo viewer */
+        .photo-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, .88);
+            cursor: zoom-out;
+        }
+
+        .photo-lightbox.open {
+            display: flex;
+        }
+
+        .photo-lightbox img {
+            display: block;
+            max-width: 95vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, .35);
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 25px;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
         }
 
         @media (max-width: 800px) {
@@ -330,395 +372,500 @@
 </head>
 
 <body>
-    <div class="page-frame">
-        <nav class="top-nav">
-            <a class="brand" href="index.html">BEYZA YILMAZ</a>
+<div class="page-frame">
 
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="technologies.html">Technologies</a>
-                <a class="active" href="projects.html">Projects</a>
-                <a href="contact.html">Contact</a>
+    <nav class="top-nav">
+        <a class="brand" href="index.html">BEYZA YILMAZ</a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="technologies.html">Technologies</a>
+            <a class="active" href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <main class="projects-container">
+        <h1 class="page-heading">My Favourite Places in Ankara</h1>
+        <div class="heading-line"></div>
+
+        <p class="intro">
+            Welcome to my personal map of Ankara! This website shows some of my favourite places
+            in the city, including historical sites, parks, theatres, cafes and shops.
+            Both maps display the same locations using different Web GIS libraries.
+        </p>
+
+        <section class="legend-card">
+            <h2 class="section-title">Map Legend</h2>
+            <div class="legend">
+                <span><i class="dot historical"></i> Historical</span>
+                <span><i class="dot park"></i> Park</span>
+                <span><i class="dot theatre"></i> Theatre</span>
+                <span><i class="dot cafe"></i> Cafe</span>
+                <span><i class="dot shop"></i> Shop</span>
             </div>
-        </nav>
+        </section>
 
-        <main class="projects-container">
-            <h1 class="page-heading">My Favourite Places in Ankara</h1>
-            <div class="heading-line"></div>
-
-            <p class="intro">
-                Welcome to my personal map of Ankara! This website shows some of my favourite places
-                in the city, including historical sites, parks, theatres, cafes and shops.
-                Both maps display the same locations using different Web GIS libraries.
+        <section class="map-section">
+            <h2 class="section-title">OpenLayers Map</h2>
+            <p class="note">
+                Markers appear at zoom level 12 and above.
+                Nearby markers are grouped together; zoom in to explore individual places.
             </p>
+            <div id="openlayers-map" class="map"></div>
+        </section>
 
-            <section class="legend-card">
-                <h2 class="section-title">Map Legend</h2>
+        <section class="map-section">
+            <h2 class="section-title">Leaflet Map</h2>
+            <p class="note">
+                Markers appear at zoom level 12 and above.
+                Click a marker to see its photo and Google Maps link.
+                Click the photo to enlarge it.
+            </p>
+            <div id="leaflet-map" class="map"></div>
+        </section>
 
-                <div class="legend">
-                    <span><i class="dot historical"></i> Historical</span>
-                    <span><i class="dot park"></i> Park</span>
-                    <span><i class="dot theatre"></i> Theatre</span>
-                    <span><i class="dot cafe"></i> Cafe</span>
-                    <span><i class="dot shop"></i> Shop</span>
-                </div>
-            </section>
+        <footer>Map data © OpenStreetMap contributors.</footer>
+    </main>
+</div>
 
-            <section class="map-section">
-                <h2 class="section-title">OpenLayers Map</h2>
+<!-- Full-screen photo viewer -->
+<div id="photo-lightbox" class="photo-lightbox"
+     role="dialog" aria-modal="true" aria-label="Enlarged photo">
+    <button id="lightbox-close" class="lightbox-close"
+            type="button" aria-label="Close photo">&times;</button>
+    <img id="lightbox-image" src="" alt="Enlarged location photo">
+</div>
 
-                <p class="note">
-                    Markers appear at zoom level 12 and above.
-                    Nearby markers are grouped together; zoom in to explore individual places.
-                </p>
+<script src="https://cdn.jsdelivr.net/npm/ol@10.6.1/dist/ol.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-                <div id="openlayers-map" class="map"></div>
-            </section>
+<script>
+const locations = [
+    {
+        name: "Anıtkabir",
+        image: "images/image1.jpg",
+        category: "Historical",
+        coordinates: [32.8369, 39.9251]
+    },
+    {
+        name: "Cumhuriyet Müzesi (II. TBMM Binası)",
+        image: "images/image2.jpg",
+        category: "Historical",
+        coordinates: [32.85167, 39.94111]
+    },
+    {
+        name: "Gölbaşı",
+        image: "images/image3.jpg",
+        category: "Park",
+        coordinates: [32.80375866676279, 39.786115428765434]
+    },
+    {
+        name: "Botanik Parkı",
+        image: "images/image4.jpg",
+        category: "Park",
+        coordinates: [32.85682, 39.88819]
+    },
+    {
+        name: "Seğmenler Parkı",
+        image: "images/image5.jpg",
+        category: "Park",
+        coordinates: [32.8745, 39.8945]
+    },
+    {
+        name: "Ankara Palas Müzesi",
+        image: "images/image6.jpg",
+        category: "Historical",
+        coordinates: [32.851589, 39.941538]
+    },
+    {
+        name: "Küçük Tiyatro",
+        image: "images/image7.jpg",
+        category: "Theatre",
+        coordinates: [32.853253, 39.938464]
+    },
+    {
+        name: "Ankara Kalesi",
+        image: "images/image8.jpg",
+        category: "Historical",
+        coordinates: [32.86543, 39.94149]
+    },
+    {
+        name: "Latife’s — Beşevler",
+        image: "images/image9.jpg",
+        category: "Cafe",
+        coordinates: [32.828672, 39.93042]
+    },
+    {
+        name: "Boston Drink & Dessert — Bahçelievler",
+        image: "images/image10.jpg",
+        category: "Cafe",
+        coordinates: [32.826596, 39.9251]
+    },
+    {
+        name: "Versando Bahçelievler",
+        image: "images/image11.jpg",
+        category: "Cafe",
+        coordinates: [32.827270, 39.928269]
+    },
+    {
+        name: "Bonapple — Tunalı Hilmi",
+        image: "images/image12.jpg",
+        category: "Cafe",
+        coordinates: [32.85958061174765, 39.908714874923284]
+    },
+    {
+        name: "Mountain — Beşevler",
+        image: "images/image13.jpg",
+        category: "Cafe",
+        coordinates: [32.82507145407711, 39.93192400754589]
+    },
+    {
+        name: "Coffee LAB Beşevler",
+        image: "images/image14.jpg",
+        category: "Cafe",
+        coordinates: [32.8248, 39.9315]
+    },
+    {
+        name: "Kahve Dünyası — Tunalı Hilmi",
+        image: "images/image15.jpg",
+        category: "Cafe",
+        coordinates: [32.862593612065666, 39.89918312222412]
+    },
+    {
+        name: "Walker's Tunalı",
+        image: "images/image16.jpg",
+        category: "Cafe",
+        coordinates: [32.8607, 39.9062]
+    },
+    {
+        name: "Caffé Di Toeé — Saraçoğlu",
+        image: "images/image17.jpg",
+        category: "Cafe",
+        coordinates: [32.848902, 39.920217]
+    },
+    {
+        name: "Hanedan Esans — Ulus",
+        image: "images/image18.jpg",
+        category: "Shop",
+        coordinates: [32.857957, 39.942651]
+    },
+    {
+        name: "Zaande Restaurant & Coffee",
+        image: "images/image19.jpg",
+        category: "Cafe",
+        coordinates: [32.76527049449635, 39.91266591640132]
+    },
+    {
+        name: "IF Sokak — Tepe",
+        image: "images/image20.jpg",
+        category: "Cafe",
+        coordinates: [32.75530814973767, 39.911382138615956]
+    },
+    {
+        name: "Big Baker — Beşevler",
+        image: "images/image21.jpg",
+        category: "Cafe",
+        coordinates: [32.82693385925779, 39.93297273758914]
+    }
+];
 
-            <section class="map-section">
-                <h2 class="section-title">Leaflet Map</h2>
+function getCategoryColor(category) {
+    const colors = {
+        "Historical": "#2878b5",
+        "Park": "#27966b",
+        "Theatre": "#d85b91",
+        "Cafe": "#e67e22",
+        "Shop": "#805ad5"
+    };
 
-                <p class="note">
-                    Markers appear at zoom level 12 and above.
-                    Click a marker to see the place name and category.
-                </p>
+    return colors[category] || "#2878b5";
+}
 
-                <div id="leaflet-map" class="map"></div>
-            </section>
+/* Full-screen photo viewer */
+const lightbox = document.getElementById("photo-lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const lightboxClose = document.getElementById("lightbox-close");
 
-            <footer>
-                Map data © OpenStreetMap contributors.
-            </footer>
-        </main>
-    </div>
+function openLightbox(imagePath, imageAlt) {
+    lightboxImage.src = imagePath;
+    lightboxImage.alt = imageAlt;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/ol@10.6.1/dist/ol.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightboxImage.src = "";
+    document.body.style.overflow = "";
+}
 
-    <script>
-        const locations = [
-            {
-                name: "Anıtkabir",
-                category: "Historical",
-                coordinates: [32.8369, 39.9251]
-            },
-            {
-                name: "Cumhuriyet Müzesi (II. TBMM Binası)",
-                category: "Historical",
-                coordinates: [32.85167, 39.94111]
-            },
-            {
-                name: "Gölbaşı",
-                category: "Park",
-                coordinates: [32.80375866676279, 39.786115428765434]
-            },
-            {
-                name: "Botanik Parkı",
-                category: "Park",
-                coordinates: [32.85682, 39.88819]
-            },
-            {
-                name: "Seğmenler Parkı",
-                category: "Park",
-                coordinates: [32.8745, 39.8945]
-            },
-            {
-                name: "Ankara Palas Müzesi",
-                category: "Historical",
-                coordinates: [32.851589, 39.941538]
-            },
-            {
-                name: "Küçük Tiyatro",
-                category: "Theatre",
-                coordinates: [32.853253, 39.938464]
-            },
-            {
-                name: "Ankara Kalesi",
-                category: "Historical",
-                coordinates: [32.86543, 39.94149]
-            },
-            {
-                name: "Latife’s — Beşevler",
-                category: "Cafe",
-                coordinates: [32.828672, 39.93042]
-            },
-            {
-                name: "Boston Drink & Dessert — Bahçelievler",
-                category: "Cafe",
-                coordinates: [32.826596, 39.9251]
-            },
-            {
-                name: "Versando Bahçelievler",
-                category: "Cafe",
-                coordinates: [32.827270, 39.928269]
-            },
-            {
-                name: "Bonapple — Tunalı Hilmi",
-                category: "Cafe",
-                coordinates: [32.85958061174765, 39.908714874923284]
-            },
-            {
-                name: "Mountain — Beşevler",
-                category: "Cafe",
-                coordinates: [32.82507145407711, 39.93192400754589]
-            },
-            {
-                name: "Coffee LAB Beşevler",
-                category: "Cafe",
-                coordinates: [32.8248, 39.9315]
-            },
-            {
-                name: "Kahve Dünyası — Tunalı Hilmi",
-                category: "Cafe",
-                coordinates: [32.862593612065666, 39.89918312222412]
-            },
-            {
-                name: "Walker's Tunalı",
-                category: "Cafe",
-                coordinates: [32.8607, 39.9062]
-            },
-            {
-                name: "Caffé Di Toeé — Saraçoğlu",
-                category: "Cafe",
-                coordinates: [32.848902, 39.920217]
-            },
-            {
-                name: "Hanedan Esans — Ulus",
-                category: "Shop",
-                coordinates: [32.857957, 39.942651]
-            },
-            {
-               name: "Zaande Restaurant & Coffee",
-               category: "Cafe",
-               coordinates: [32.76527049449635, 39.91266591640132]
-       },
-            {
-                name: "IF Sokak — Tepe",
-                category: "Cafe",
-                coordinates: [32.75530814973767, 39.911382138615956]
-            }
-        ];
+lightboxClose.addEventListener("click", closeLightbox);
 
-    
-        function getCategoryColor(category) {
-            const colors = {
-                "Historical": "#2878b5",
-                "Park": "#27966b",
-                "Theatre": "#d85b91",
-                "Cafe": "#e67e22",
-                "Shop": "#805ad5"
-            };
+lightbox.addEventListener("click", function(event) {
+    if (event.target === lightbox) {
+        closeLightbox();
+    }
+});
 
-            return colors[category] || "#2878b5";
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeLightbox();
+    }
+});
+
+/* OpenLayers markers and clustering */
+const features = locations.map(function(location) {
+    return new ol.Feature({
+        geometry: new ol.geom.Point(
+            ol.proj.fromLonLat(location.coordinates)
+        ),
+        name: location.name,
+        category: location.category
+    });
+});
+
+const vectorSource = new ol.source.Vector({
+    features: features,
+    wrapX: false
+});
+
+const clusterSource = new ol.source.Cluster({
+    distance: 40,
+    source: vectorSource
+});
+
+const markerLayer = new ol.layer.Vector({
+    source: clusterSource,
+    visible: false,
+    style: function(feature) {
+        const groupedFeatures = feature.get("features");
+        const count = groupedFeatures.length;
+        let color = "#596b78";
+
+        if (count === 1) {
+            color = getCategoryColor(
+                groupedFeatures[0].get("category")
+            );
         }
 
-        const features = locations.map(function(location) {
-            return new ol.Feature({
-                geometry: new ol.geom.Point(
-                    ol.proj.fromLonLat(location.coordinates)
-                ),
-                name: location.name,
-                category: location.category
-            });
-        });
-
-        const vectorSource = new ol.source.Vector({
-            features: features,
-            wrapX: false
-        });
-
-        const clusterSource = new ol.source.Cluster({
-            distance: 40,
-            source: vectorSource
-        });
-
-        const markerLayer = new ol.layer.Vector({
-            source: clusterSource,
-            visible: false,
-
-            style: function(feature) {
-                const groupedFeatures = feature.get("features");
-                const count = groupedFeatures.length;
-
-                let color = "#596b78";
-
-                if (count === 1) {
-                    color = getCategoryColor(
-                        groupedFeatures[0].get("category")
-                    );
-                }
-
-                return new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: count > 1 ? 13 : 8,
-                        fill: new ol.style.Fill({
-                            color: color
-                        }),
-                        stroke: new ol.style.Stroke({
-                            color: "#ffffff",
-                            width: 2
-                        })
-                    }),
-
-                    text: new ol.style.Text({
-                        text: count > 1 ? String(count) : "",
-                        fill: new ol.style.Fill({
-                            color: "#ffffff"
-                        }),
-                        font: "bold 12px Arial"
-                    })
-                });
-            }
-        });
-
-        const openlayersMap = new ol.Map({
-            target: "openlayers-map",
-
-            layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM({
-                        wrapX: false
-                    })
-                }),
-                markerLayer
-            ],
-
-            view: new ol.View({
-                center: ol.proj.fromLonLat([32.85, 39.92]),
-                zoom: 11,
-                extent: ol.proj.get("EPSG:3857").getExtent()
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: count > 1 ? 13 : 8,
+                fill: new ol.style.Fill({ color: color }),
+                stroke: new ol.style.Stroke({
+                    color: "#ffffff",
+                    width: 2
+                })
+            }),
+            text: new ol.style.Text({
+                text: count > 1 ? String(count) : "",
+                fill: new ol.style.Fill({ color: "#ffffff" }),
+                font: "bold 12px Arial"
             })
         });
+    }
+});
 
-        function updateOpenLayersMarkers() {
-            markerLayer.setVisible(
-                openlayersMap.getView().getZoom() >= 12
-            );
+const openlayersMap = new ol.Map({
+    target: "openlayers-map",
+    layers: [
+        new ol.layer.Tile({
+            source: new ol.source.OSM({ wrapX: false })
+        }),
+        markerLayer
+    ],
+    view: new ol.View({
+        center: ol.proj.fromLonLat([32.85, 39.92]),
+        zoom: 11,
+        extent: ol.proj.get("EPSG:3857").getExtent()
+    })
+});
+
+function updateOpenLayersMarkers() {
+    markerLayer.setVisible(
+        openlayersMap.getView().getZoom() >= 12
+    );
+}
+
+openlayersMap.getView().on(
+    "change:resolution",
+    updateOpenLayersMarkers
+);
+
+updateOpenLayersMarkers();
+
+/* OpenLayers popup */
+const olPopupElement = document.createElement("div");
+olPopupElement.className = "ol-location-popup";
+olPopupElement.style.display = "none";
+
+olPopupElement.innerHTML = `
+    <button class="ol-location-popup-close"
+            type="button" aria-label="Close popup">&times;</button>
+    <h3 class="ol-location-popup-title"></h3>
+    <p class="ol-location-popup-category"></p>
+`;
+
+const olPopupOverlay = new ol.Overlay({
+    element: olPopupElement,
+    autoPan: { animation: { duration: 200 } },
+    positioning: "bottom-left",
+    offset: [0, -14],
+    stopEvent: true
+});
+
+openlayersMap.addOverlay(olPopupOverlay);
+
+const olPopupTitle =
+    olPopupElement.querySelector(".ol-location-popup-title");
+
+const olPopupCategory =
+    olPopupElement.querySelector(".ol-location-popup-category");
+
+olPopupElement.querySelector(
+    ".ol-location-popup-close"
+).addEventListener("click", function() {
+    olPopupOverlay.setPosition(undefined);
+    olPopupElement.style.display = "none";
+});
+
+openlayersMap.on("singleclick", function(event) {
+    let clickedFeature;
+
+    openlayersMap.forEachFeatureAtPixel(
+        event.pixel,
+        function(feature) {
+            clickedFeature = feature;
+            return true;
         }
+    );
 
-        openlayersMap.getView().on(
-            "change:resolution",
-            updateOpenLayersMarkers
-        );
-
-        updateOpenLayersMarkers();
-
-        // Show a styled popup on the map instead of a browser alert.
-        const olPopupElement = document.createElement("div");
-        olPopupElement.className = "ol-location-popup";
+    if (!clickedFeature) {
+        olPopupOverlay.setPosition(undefined);
         olPopupElement.style.display = "none";
-        olPopupElement.innerHTML = `
-            <button class="ol-location-popup-close" type="button" aria-label="Close popup">&times;</button>
-            <h3 class="ol-location-popup-title"></h3>
-            <p class="ol-location-popup-category"></p>
-        `;
+        return;
+    }
 
-        const olPopupOverlay = new ol.Overlay({
-            element: olPopupElement,
-            autoPan: {
-                animation: { duration: 200 }
-            },
-            positioning: "bottom-left",
-            offset: [0, -14],
-            stopEvent: true
-        });
+    const groupedFeatures = clickedFeature.get("features");
 
-        openlayersMap.addOverlay(olPopupOverlay);
+    if (!groupedFeatures || groupedFeatures.length !== 1) {
+        olPopupOverlay.setPosition(undefined);
+        olPopupElement.style.display = "none";
+        return;
+    }
 
-        const olPopupTitle = olPopupElement.querySelector(".ol-location-popup-title");
-        const olPopupCategory = olPopupElement.querySelector(".ol-location-popup-category");
-        const olPopupClose = olPopupElement.querySelector(".ol-location-popup-close");
+    const location = groupedFeatures[0];
 
-        function closeOpenLayersPopup() {
-            olPopupOverlay.setPosition(undefined);
-            olPopupElement.style.display = "none";
+    olPopupTitle.textContent = location.get("name");
+    olPopupCategory.textContent =
+        "Category: " + location.get("category");
+
+    olPopupElement.style.display = "block";
+    olPopupOverlay.setPosition(event.coordinate);
+});
+
+/* Leaflet map */
+const leafletMap = L.map("leaflet-map", {
+    minZoom: 2,
+    maxBounds: [[-85, -180], [85, 180]],
+    maxBoundsViscosity: 1.0,
+    worldCopyJump: false
+}).setView([39.92, 32.85], 11);
+
+L.tileLayer(
+    "https://tile.openstreetmap.de/{z}/{x}/{y}.png",
+    {
+        attribution: "&copy; OpenStreetMap contributors",
+        noWrap: true,
+        bounds: [[-85, -180], [85, 180]]
+    }
+).addTo(leafletMap);
+
+const markerGroup = L.layerGroup();
+
+locations.forEach(function(location) {
+    const latitude = location.coordinates[1];
+    const longitude = location.coordinates[0];
+
+    const googleMapsUrl =
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(location.name + ", Ankara");
+
+    const marker = L.circleMarker(
+        [latitude, longitude],
+        {
+            radius: 7,
+            color: "#ffffff",
+            weight: 2,
+            fillColor: getCategoryColor(location.category),
+            fillOpacity: 1
         }
+    );
 
-        olPopupClose.addEventListener("click", closeOpenLayersPopup);
+    marker.addTo(markerGroup);
 
-        openlayersMap.on("singleclick", function(event) {
-            let clickedFeature;
+    const popupContent = `
+        <div style="width:270px; max-width:75vw;">
+            <img
+                class="popup-photo"
+                src="${location.image}"
+                alt="${location.name}"
+                title="Click to enlarge"
+            >
 
-            openlayersMap.forEachFeatureAtPixel(event.pixel, function(feature) {
-                clickedFeature = feature;
-                return true;
+            <strong>${location.name}</strong>
+            <br>
+
+            <span>Category: ${location.category}</span>
+            <br>
+
+            <a
+                class="google-map-link"
+                href="${googleMapsUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                📍 Click here to go to Google Maps
+            </a>
+        </div>
+    `;
+
+    marker.bindPopup(popupContent, {
+        maxWidth: 300,
+        className: "place-photo-popup"
+    });
+
+    marker.on("popupopen", function(event) {
+        const popup = event.popup.getElement();
+        const photo = popup.querySelector(".popup-photo");
+
+        if (photo) {
+            photo.addEventListener("click", function() {
+                if (photo.complete && photo.naturalWidth > 0) {
+                    openLightbox(location.image, location.name);
+                }
             });
-
-            if (!clickedFeature) {
-                closeOpenLayersPopup();
-                return;
-            }
-
-            const groupedFeatures = clickedFeature.get("features");
-
-            if (!groupedFeatures || groupedFeatures.length !== 1) {
-                closeOpenLayersPopup();
-                return;
-            }
-
-            const location = groupedFeatures[0];
-            olPopupTitle.textContent = location.get("name");
-            olPopupCategory.textContent = "Category: " + location.get("category");
-            olPopupElement.style.display = "block";
-            olPopupOverlay.setPosition(event.coordinate);
-        });
-
-        const leafletMap = L.map("leaflet-map", {
-            minZoom: 2,
-            maxBounds: [[-85, -180], [85, 180]],
-            maxBoundsViscosity: 1.0,
-            worldCopyJump: false
-        }).setView([39.92, 32.85], 11);
-
-        L.tileLayer(
-            "https://tile.openstreetmap.de/{z}/{x}/{y}.png",
-            {
-                attribution: "&copy; OpenStreetMap contributors",
-                noWrap: true,
-                bounds: [[-85, -180], [85, 180]]
-            }
-        ).addTo(leafletMap);
-
-        const markerGroup = L.layerGroup();
-
-        locations.forEach(function(location) {
-            const marker = L.circleMarker(
-                [
-                    location.coordinates[1],
-                    location.coordinates[0]
-                ],
-                {
-                    radius: 7,
-                    color: "#ffffff",
-                    weight: 2,
-                    fillColor: getCategoryColor(location.category),
-                    fillOpacity: 1
-                }
-            );
-
-            marker.addTo(markerGroup);
-
-            marker.bindPopup(
-                "<strong>" + location.name + "</strong>" +
-                "<br>Category: " + location.category
-            );
-        });
-
-        function updateLeafletMarkers() {
-            if (leafletMap.getZoom() >= 12) {
-                if (!leafletMap.hasLayer(markerGroup)) {
-                    leafletMap.addLayer(markerGroup);
-                }
-            } else {
-                if (leafletMap.hasLayer(markerGroup)) {
-                    leafletMap.removeLayer(markerGroup);
-                }
-            }
         }
+    });
+});
 
-        leafletMap.on("zoomend", updateLeafletMarkers);
-        updateLeafletMarkers();
-    </script>
+function updateLeafletMarkers() {
+    if (leafletMap.getZoom() >= 12) {
+        if (!leafletMap.hasLayer(markerGroup)) {
+            leafletMap.addLayer(markerGroup);
+        }
+    } else {
+        if (leafletMap.hasLayer(markerGroup)) {
+            leafletMap.removeLayer(markerGroup);
+        }
+    }
+}
+
+leafletMap.on("zoomend", updateLeafletMarkers);
+updateLeafletMarkers();
+</script>
+
 </body>
 </html>
