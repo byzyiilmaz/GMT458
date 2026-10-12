@@ -25,11 +25,19 @@ This website was developed as part of the GMT458 course. It introduces me, prese
 
 ## Interactive Map Features
 
-The Projects page contains two interactive maps created with OpenLayers and Leaflet. Both maps display the same locations in Ankara.
+The Projects page contains two interactive maps created with OpenLayers and Leaflet. Both maps display the same 21 locations in Ankara, including historical sites, parks, theatres, cafes, and shops.
 
-Markers appear when the zoom level reaches 12 or higher. The OpenLayers map uses marker clustering to reduce overlap between nearby locations. On the Leaflet map, clicking a marker displays the place name and category.
+- **Zoom-based marker visibility:** Markers appear at zoom level 12 and above.
+- **Marker clustering:** The OpenLayers map groups nearby markers to reduce overlap.
+- **Category-based styling:** Markers use different colours according to location categories.
+- **Photo popups:** Clicking a marker on the Leaflet map displays a photograph, the place name, and its category.
+- **Full-screen photo viewer:** Clicking a popup photograph opens a larger view of the image.
+- **Google Maps links:** Each Leaflet popup provides a link to find the location on Google Maps.
+- **Reduced world repetition:** Map settings prevent the world map from repeating horizontally when zooming out.
 
-Settings have been applied in both libraries to prevent the world map from repeating horizontally when zooming out.
+## Website Design
+
+The website uses a clean design with a light background, green accents, consistent navigation, and responsive layouts for different screen sizes. CSS is used to style the page sections, navigation links, and interactive elements.
 
 ## Problems Encountered and What I Learned
 
@@ -41,7 +49,7 @@ Additionally, I explored settings that prevent the world map from repeating when
 
 ## AI Usage and Learning
 
-AI tools were used extensively during the coding process to help create and improve HTML, CSS, and JavaScript code, develop the OpenLayers and Leaflet maps, and address technical issues.
+AI tools were used during the coding process to help create and improve HTML, CSS, and JavaScript code, develop the OpenLayers and Leaflet maps, and address technical issues.
 
 One specific thing I learned with AI assistance was how to control marker visibility based on zoom level and use clustering to reduce marker overlap. I also researched some of the problems I encountered using online resources.
 
