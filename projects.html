@@ -219,6 +219,64 @@
             line-height: 1.6;
         }
 
+        /* OpenLayers location popup */
+        .ol-location-popup {
+            position: relative;
+            min-width: 190px;
+            max-width: 260px;
+            padding: 15px 38px 15px 16px;
+            border: 1px solid #dcefe7;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 8px 28px rgba(32, 55, 70, 0.18);
+            color: #263746;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .ol-location-popup::after {
+            content: "";
+            position: absolute;
+            left: 24px;
+            bottom: -8px;
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border-right: 1px solid #dcefe7;
+            border-bottom: 1px solid #dcefe7;
+            transform: rotate(45deg);
+        }
+        .ol-location-popup-title {
+            margin: 0 0 5px;
+            color: #203746;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+        .ol-location-popup-category {
+            margin: 0;
+            color: #63717a;
+            font-size: 13px;
+        }
+        .ol-location-popup-close {
+            position: absolute;
+            top: 7px;
+            right: 9px;
+            width: 25px;
+            height: 25px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: #f1f7f4;
+            color: #53636d;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .ol-location-popup-close:hover {
+            background: #e0f1e8;
+            color: #16865b;
+        }
+
         @media (max-width: 800px) {
             .page-frame {
                 width: calc(100% - 16px);
@@ -546,23 +604,64 @@
 
         updateOpenLayersMarkers();
 
+        // Show a styled popup on the map instead of a browser alert.
+        const olPopupElement = document.createElement("div");
+        olPopupElement.className = "ol-location-popup";
+        olPopupElement.style.display = "none";
+        olPopupElement.innerHTML = `
+            <button class="ol-location-popup-close" type="button" aria-label="Close popup">&times;</button>
+            <h3 class="ol-location-popup-title"></h3>
+            <p class="ol-location-popup-category"></p>
+        `;
+
+        const olPopupOverlay = new ol.Overlay({
+            element: olPopupElement,
+            autoPan: {
+                animation: { duration: 200 }
+            },
+            positioning: "bottom-left",
+            offset: [0, -14],
+            stopEvent: true
+        });
+
+        openlayersMap.addOverlay(olPopupOverlay);
+
+        const olPopupTitle = olPopupElement.querySelector(".ol-location-popup-title");
+        const olPopupCategory = olPopupElement.querySelector(".ol-location-popup-category");
+        const olPopupClose = olPopupElement.querySelector(".ol-location-popup-close");
+
+        function closeOpenLayersPopup() {
+            olPopupOverlay.setPosition(undefined);
+            olPopupElement.style.display = "none";
+        }
+
+        olPopupClose.addEventListener("click", closeOpenLayersPopup);
+
         openlayersMap.on("singleclick", function(event) {
-            openlayersMap.forEachFeatureAtPixel(
-                event.pixel,
-                function(feature) {
-                    const groupedFeatures = feature.get("features");
+            let clickedFeature;
 
-                    if (groupedFeatures && groupedFeatures.length === 1) {
-                        const location = groupedFeatures[0];
+            openlayersMap.forEachFeatureAtPixel(event.pixel, function(feature) {
+                clickedFeature = feature;
+                return true;
+            });
 
-                        alert(
-                            location.get("name") +
-                            "\nCategory: " +
-                            location.get("category")
-                        );
-                    }
-                }
-            );
+            if (!clickedFeature) {
+                closeOpenLayersPopup();
+                return;
+            }
+
+            const groupedFeatures = clickedFeature.get("features");
+
+            if (!groupedFeatures || groupedFeatures.length !== 1) {
+                closeOpenLayersPopup();
+                return;
+            }
+
+            const location = groupedFeatures[0];
+            olPopupTitle.textContent = location.get("name");
+            olPopupCategory.textContent = "Category: " + location.get("category");
+            olPopupElement.style.display = "block";
+            olPopupOverlay.setPosition(event.coordinate);
         });
 
         const leafletMap = L.map("leaflet-map", {
